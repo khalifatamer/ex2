@@ -5,16 +5,19 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
+#include <string.h>
+
 class Player{
     char *name;
-    unsigned int level;
+    int level;
     unsigned int force;
-    const unsigned int maxHP;
-    unsigned int HP;
+    unsigned int maxHP;
+    unsigned int hp;
     unsigned int coins;
 
 public:
-    Player(char *name, const unsigned int maxHP, unsigned int force = 5 );
+    Player(char *name, unsigned int maxHP, unsigned int force);
+    Player(const Player&);
     ~Player();
     void printInfo();
     void levelUp();

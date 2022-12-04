@@ -15,6 +15,12 @@ void Mtmchkin::playNextCard()
     m_cards->printInfo();
     m_cards->applyEncounter(m_player);
     m_player.printInfo();
+    if (m_player.isKnockedOut()){
+        m_status = GameStatus::Loss;
+    }
+    if (m_player.getLevel() == MAX_LEVEL){
+        m_status = GameStatus::Win;
+    }
     Card temp = *(m_cards);
     for (int i = 0; i < numOfCards-1; ++i) {
         m_cards[i] = m_cards[i+1];
@@ -25,10 +31,11 @@ void Mtmchkin::playNextCard()
 
 bool Mtmchkin::isOver() const
 {
-    if (m_player.getLevel() == 10 || m_player.isKnockedOut())
+    if (m_player.getLevel() == MAX_LEVEL || m_player.isKnockedOut())
     {
         return true;
     }
+
     else
     {
         return false;

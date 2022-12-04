@@ -46,8 +46,3 @@ GameStatus Mtmchkin::getGameStatus() const
 {
     return m_status;
 }
-
-void Mtmchkin::setGameStatus(GameStatus gameStatus)
-{
-    m_status = gameStatus;
-}

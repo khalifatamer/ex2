@@ -5,7 +5,7 @@
 #include "player.h"
 #include "utilities.h"
 
-Player::Player(const char *name, unsigned int maxHP = 100, unsigned int force = 5)
+Player::Player(const char *name, unsigned int maxHP, unsigned int force)
 {
     int size = strlen(name);
     this->name = new char[size + 1];
@@ -36,7 +36,7 @@ Player::~Player()
     delete [] name;
 }
 
-void Player::printInfo()
+void Player::printInfo() const
 {
     printPlayerInfo(name, level, force, hp, coins);
 }
@@ -46,7 +46,7 @@ void Player::levelUp()
     level++;
 }
 
-int Player::getLevel()
+int Player::getLevel() const
 {
     return level;
 }
@@ -66,7 +66,7 @@ void Player::damage(int value)
     hp -= value;
 }
 
-bool Player::isKnockedOut()
+bool Player::isKnockedOut() const
 {
     if (hp == 0){
         return true;
@@ -88,7 +88,7 @@ bool Player::pay(int value)
     return false;
 }
 
-unsigned int Player::getAttackStrength()
+unsigned int Player::getAttackStrength() const
 {
     return (level + force);
 }

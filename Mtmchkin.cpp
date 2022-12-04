@@ -1,10 +1,10 @@
 #include "Mtmchkin.h"
 
-Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards)
+Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards):m_player(playerName)
 {
-    Player m_player = Player(playerName);
+    Player copy(playerName);
     Mtmchkin::setGameStatus(GameStatus::MidGame);
-//    Player player = Player(playerName);
+    this->numOfCards = numOfCards;
     m_cards = new Card[numOfCards];
     for (int i = 0; i < numOfCards; ++i) {
         m_cards[i] = cardsArray[i];
@@ -15,7 +15,11 @@ void Mtmchkin::playNextCard()
     m_cards->printInfo();
     m_cards->applyEncounter(m_player);
     m_player.printInfo();
-    m_cards += 1;
+    Card temp = *(m_cards);
+    for (int i = 0; i < numOfCards-1; ++i) {
+        m_cards[i] = m_cards[i+1];
+    }
+    m_cards[numOfCards-1] = temp;
 
 }
 
@@ -25,9 +29,18 @@ bool Mtmchkin::isOver() const
     {
         return true;
     }
+    else
+    {
+        return false;
+    }
 }
 
 GameStatus Mtmchkin::getGameStatus() const
 {
+    return m_status;
+}
 
+void Mtmchkin::setGameStatus(GameStatus gameStatus)
+{
+    m_status = gameStatus;
 }

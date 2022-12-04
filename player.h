@@ -19,16 +19,16 @@ public:
     Player(const char *name, unsigned int maxHP = 100, unsigned int force = 5);
     Player(const Player&);
     ~Player();
-    void printInfo();
+    void printInfo() const;
     void levelUp();
-    int getLevel();
+    int getLevel() const;
     void buff(int value);
     void heal (int value);
     void damage (int value);
-    bool isKnockedOut();
+    bool isKnockedOut() const;
     void addCoins(int value);
     bool pay(int value);
-    unsigned int getAttackStrength();
+    unsigned int getAttackStrength() const;
 
 };
 

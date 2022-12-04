@@ -58,7 +58,7 @@ public:
      */
     GameStatus getGameStatus() const;
 
-    GameStatus setGameStatus(GameStatus gameStatus) const;
+    void setGameStatus(GameStatus gameStatus);
 
 
     //TODO: complete the Mtmchkin class.
@@ -68,6 +68,7 @@ private:
     GameStatus m_status;
     Card *m_cards;
     Player m_player;
+    int numOfCards;
 
 };
 

@@ -5,7 +5,7 @@
 #include "player.h"
 #include "utilities.h"
 
-Player::Player(char *name, unsigned int maxHP, unsigned int force = 5)
+Player::Player(const char *name, unsigned int maxHP = 100, unsigned int force = 5)
 {
     int size = strlen(name);
     this->name = new char[size + 1];
@@ -18,7 +18,7 @@ Player::Player(char *name, unsigned int maxHP, unsigned int force = 5)
 }
 
 Player::Player(const Player& copy):
-    name(new char [strlen(copy.name)]),
+    name(new char [strlen(copy.name)+1]),
     level(copy.level),
     force(copy.force),
     maxHP(copy.maxHP),

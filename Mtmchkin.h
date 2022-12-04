@@ -7,6 +7,7 @@
 #include "Card.h"
 #include <iostream>
 
+
 /*
  * GameStatus:
  * MidGame - The game is still active and the player continues to encounter cards.
@@ -57,10 +58,16 @@ public:
      */
     GameStatus getGameStatus() const;
 
+    GameStatus setGameStatus(GameStatus gameStatus) const;
+
+
     //TODO: complete the Mtmchkin class.
 
 private:
     //TODO: complete the Mtmchkin class.
+    GameStatus m_status;
+    Card *m_cards;
+    Player m_player;
 
 };
 

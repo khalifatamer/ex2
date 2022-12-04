@@ -16,7 +16,7 @@ class Player{
     unsigned int coins;
 
 public:
-    Player(char *name, unsigned int maxHP, unsigned int force);
+    Player(const char *name, unsigned int maxHP = 100, unsigned int force = 5);
     Player(const Player&);
     ~Player();
     void printInfo();

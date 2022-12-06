@@ -3,16 +3,29 @@
 //
 
 #include "Player.h"
-#include "utilities.h"
 
-Player::Player(const char *name, unsigned int maxHP, unsigned int force)
+Player::Player(const char *name, int maxHP, int force)
 {
     int size = strlen(name);
     this->name = new char[size + 1];
     strcpy(this->name, name);
     level = DEFAULT_STARTING_LEVEL;
-    this->force = force;
-    this->maxHP = maxHP;
+    if(force < 0)
+    {
+        this->force = DEFAULT_FORCE;
+    }
+    else
+    {
+        this->force = force;
+    }
+    if(maxHP <= 0)
+    {
+        this->maxHP = DEFAULT_MAX_HP;
+    }
+    else
+    {
+        this->maxHP = maxHP;
+    }
     hp = maxHP;
     coins = 0;
 }
@@ -25,10 +38,7 @@ Player::Player(const Player& copy):
     hp(copy.hp),
     coins(copy.coins)
 {
-    int size = strlen(copy.name);
-    for (int i = 0; i < size; ++i) {
-        name[i] = copy.name[i];
-    }
+    strcpy(name,copy.name);
 }
 
 Player::~Player()
@@ -43,7 +53,10 @@ void Player::printInfo() const
 
 void Player::levelUp()
 {
-    level++;
+    if(level != MAX_LEVEL)
+    {
+        level++;
+    }
 }
 
 int Player::getLevel() const
@@ -53,22 +66,44 @@ int Player::getLevel() const
 
 void Player::buff(int value)
 {
-    force += value;
+    if(value >= 0)
+    {
+        force += value;
+    }
 }
 
 void Player::heal(int value)
 {
-    hp += value;
+    if(value >= 0)
+    {
+        if (hp + value <= maxHP)
+        {
+            hp += value;
+        } else {
+            hp = maxHP;
+        }
+    }
 }
 
 void Player::damage(int value)
 {
-    hp -= value;
+    if(value >= 0)
+    {
+        if(hp >= value)
+        {
+            hp -= value;
+        }
+        else{
+            hp = 0;
+        }
+    }
+
 }
 
 bool Player::isKnockedOut() const
 {
-    if (hp == 0){
+    if (hp == 0)
+    {
         return true;
     }
     return false;
@@ -76,19 +111,26 @@ bool Player::isKnockedOut() const
 
 void Player::addCoins(int value)
 {
-    coins += value;
+    if(value >= 0)
+    {
+        coins += value;
+    }
 }
 
 bool Player::pay(int value)
 {
-    if(coins >= value){
-        coins -= value;
+    if(coins >= value)
+    {
+        if(value >= 0)
+        {
+            coins -= value;
+        }
         return true;
     }
     return false;
 }
 
-unsigned int Player::getAttackStrength() const
+int Player::getAttackStrength() const
 {
     return (level + force);
 }

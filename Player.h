@@ -10,17 +10,18 @@
 #define MAX_LEVEL 10
 
 #include <string.h>
+#include "utilities.h"
 
 class Player{
     char *name;
     int level;
-    unsigned int force;
-    unsigned int maxHP;
-    unsigned int hp;
-    unsigned int coins;
+    int force;
+    int maxHP;
+    int hp;
+    int coins;
 
 public:
-    Player(const char *name, unsigned int maxHP = DEFAULT_MAX_HP, unsigned int force = DEFAULT_FORCE);
+    Player(const char *name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE);
     Player(const Player&);
     ~Player();
     void printInfo() const;
@@ -32,7 +33,7 @@ public:
     bool isKnockedOut() const;
     void addCoins(int value);
     bool pay(int value);
-    unsigned int getAttackStrength() const;
+    int getAttackStrength() const;
 
 };
 

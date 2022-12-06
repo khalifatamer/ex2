@@ -10,27 +10,34 @@ void Card::applyEncounter(Player& player) const
 {
     if(m_effect == CardType::Battle)
     {
-        if(player.getAttackStrength() >= m_stats.force){
+        if(player.getAttackStrength() >= m_stats.force)
+        {
             player.levelUp();
             player.addCoins(m_stats.loot);
             printBattleResult(true);
+            return;
         }
         else
         {
             player.damage(m_stats.hpLossOnDefeat);
             printBattleResult(false);
+            return;
         }
     }
 
     if(m_effect == CardType::Buff)
     {
-        player.buff(m_stats.buff);
+        if(player.pay(m_stats.cost)) {
+            player.buff(m_stats.buff);
+        }
         return;
     }
 
     if(m_effect == CardType::Heal)
     {
-        player.heal(m_stats.heal);
+        if(player.pay(m_stats.cost)) {
+            player.heal(m_stats.heal);
+        }
         return;
     }
 
@@ -45,7 +52,8 @@ void Card::applyEncounter(Player& player) const
 
 void Card::printInfo() const
 {
-    switch (m_effect) {
+    switch (m_effect)
+    {
         case CardType::Battle:
             printBattleCardInfo(m_stats);
             break;
